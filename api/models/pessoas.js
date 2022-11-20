@@ -8,7 +8,12 @@ export default (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            Pessoas.hasMany(models.Turmas, {
+                foreignKey: "docente_id",
+            });
+            Pessoas.hasMany(models.Matriculas, {
+                foreignKey: "estudante_id",
+            });
         }
     }
     Pessoas.init(
@@ -26,14 +31,3 @@ export default (sequelize, DataTypes) => {
     );
     return Pessoas;
 };
-
-// export default (sequelize, DataTypes) => {
-//     const Pessoas = sequelize.define("Pessoas", {
-//         nome: DataTypes.STRING,
-//         ativo: DataTypes.BOOLEAN,
-//         email: DataTypes.STRING,
-//         role: DataTypes.STRING,
-//     });
-//     Pessoas.assosciate = function (models) {};
-//     return Pessoas;
-// };
